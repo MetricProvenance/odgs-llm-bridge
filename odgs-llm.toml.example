@@ -1,0 +1,40 @@
+# ──────────────────────────────────────────────────────────────
+# ODGS LLM Bridge — Configuration File
+# ──────────────────────────────────────────────────────────────
+#
+# Copy this file to one of:
+#   .odgs-llm.toml              (project root — per-project)
+#   ~/.config/odgs-llm/config.toml  (global — user-wide)
+#
+# Environment variables ALWAYS override this file:
+#   ODGS_LLM_PROVIDER          → active provider
+#   ODGS_LLM_MODEL             → model for the active provider
+#   ODGS_LLM_OLLAMA_MODEL      → Ollama-specific model
+#   ODGS_LLM_GOOGLE_MODEL      → Google GenAI model
+#   ODGS_LLM_OPENAI_MODEL      → OpenAI-compatible model
+#   ODGS_LLM_LITELLM_MODEL     → LiteLLM model string
+#   GOOGLE_API_KEY              → Google GenAI API key
+#   OPENAI_API_KEY              → OpenAI API key
+# ──────────────────────────────────────────────────────────────
+
+# Active provider (ollama | google-genai | openai-compat | litellm)
+# Leave empty for auto-detection.
+provider = ""
+
+[ollama]
+model = "gemma4:26b"
+base_url = "http://localhost:11434"
+# temperature = 0.1
+# max_tokens = 4096
+
+[google-genai]
+model = "gemini-3.1-pro"
+# api_key = ""   # ← prefer GOOGLE_API_KEY env var instead
+
+[openai-compat]
+model = "gpt-4o"
+# api_key = ""   # ← prefer OPENAI_API_KEY env var instead
+# base_url = ""  # ← set for GPT-NL, Mistral, or self-hosted
+
+[litellm]
+model = "ollama/gemma4:26b"

@@ -1,0 +1,64 @@
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "odgs-llm-bridge"
+version = "0.1.0"
+description = "LLM Bridge for the Open Data Governance Standard — AI-powered regulatory compilation, drift detection, conflict analysis, audit narration, and binding discovery."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [{name = "Metric Provenance", email = "partner@metricprovenance.com"}]
+keywords = ["odgs", "llm", "governance", "compliance", "ai", "regulatory", "eu-ai-act", "dora", "audit", "data-quality", "sovereign-ai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Legal Industry",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Office/Business :: Financial",
+]
+
+dependencies = [
+    "odgs>=6.0.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "jsonschema>=4.21.1",
+    "httpx>=0.27.0",
+    "jinja2>=3.1.0",
+]
+
+[project.optional-dependencies]
+ollama = ["ollama>=0.4.0"]
+google = ["google-genai>=1.0.0"]
+openai = ["openai>=1.0.0"]
+litellm = ["litellm>=1.30.0"]
+all = ["odgs-llm-bridge[ollama,google,openai,litellm]"]
+dev = ["pytest>=8.0.0", "pytest-asyncio>=0.23.0"]
+
+[project.urls]
+Homepage = "https://metricprovenance.com"
+Repository = "https://github.com/MetricProvenance/odgs-llm-bridge"
+Documentation = "https://github.com/MetricProvenance/odgs-llm-bridge/blob/main/README.md"
+Changelog = "https://github.com/MetricProvenance/odgs-llm-bridge/blob/main/CHANGELOG.md"
+Issues = "https://github.com/MetricProvenance/odgs-llm-bridge/issues"
+"Partner Demo" = "https://platform.metricprovenance.com"
+"ODGS Core" = "https://pypi.org/project/odgs/"
+
+[project.scripts]
+odgs-llm = "odgs_llm.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/odgs_llm"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
