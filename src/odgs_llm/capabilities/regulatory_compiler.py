@@ -30,7 +30,8 @@ def compile_regulation(
     regulation_text: str,
     *,
     context: dict[str, Any] | None = None,
-) -> list[dict]:
+    workspace_yaml: dict | None = None,
+) -> list[dict] | dict:
     """
     Parse regulation text into ODGS rule JSON objects.
 
@@ -38,10 +39,20 @@ def compile_regulation(
         bridge: The OdgsLlmBridge instance (provides the LLM provider).
         regulation_text: Raw regulation text to compile.
         context: Optional context dict (jurisdiction, domain, etc.).
+        workspace_yaml: Optional workspace configuration for license checks.
 
     Returns:
-        List of ODGS-compliant rule dicts.
+        List of ODGS-compliant rule dicts, or upgrade prompt dict if unlicensed.
     """
+    if workspace_yaml is not None:
+        from odgs_llm.licensing import check_tier, Tier, upgrade_prompt
+        if not check_tier(workspace_yaml, Tier.PROFESSIONAL):
+            return upgrade_prompt(
+                "compile_regulation",
+                Tier.PROFESSIONAL,
+                "Auto-generates rules from natural language (QE-01) — typically +40% maturity score"
+            )
+
     system_prompt = _load_prompt()
 
     user_message = f"## Regulation Text\n\n{regulation_text}"

@@ -51,7 +51,7 @@ Repository = "https://github.com/MetricProvenance/odgs-llm-bridge"
 Documentation = "https://github.com/MetricProvenance/odgs-llm-bridge/blob/main/README.md"
 Changelog = "https://github.com/MetricProvenance/odgs-llm-bridge/blob/main/CHANGELOG.md"
 Issues = "https://github.com/MetricProvenance/odgs-llm-bridge/issues"
-"Partner Demo" = "https://platform.metricprovenance.com"
+"Sovereign Registry" = "https://registry.metricprovenance.com"
 "ODGS Core" = "https://pypi.org/project/odgs/"
 
 [project.scripts]

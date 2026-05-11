@@ -24,18 +24,29 @@ def _load_prompt() -> str:
 def detect_conflicts(
     bridge: OdgsLlmBridge,
     rules: list[dict],
-) -> list[dict]:
+    *,
+    workspace_yaml: dict | None = None,
+) -> list[dict] | dict:
     """
     Detect conflicts across a set of ODGS rules.
 
     Args:
         bridge: The OdgsLlmBridge instance.
         rules: List of ODGS rule dicts to analyze.
+        workspace_yaml: Optional workspace configuration for license checks.
 
     Returns:
-        List of conflict dicts with fields:
-        - rule_a, rule_b, conflict_type, severity, description, recommendation
+        List of conflict dicts or upgrade prompt dict if unlicensed.
     """
+    if workspace_yaml is not None:
+        from odgs_llm.licensing import check_tier, Tier, upgrade_prompt
+        if not check_tier(workspace_yaml, Tier.PROFESSIONAL):
+            return upgrade_prompt(
+                "detect_conflicts",
+                Tier.PROFESSIONAL,
+                "Detects overlapping or contradictory rules before deployment (QE-01, QE-02)"
+            )
+
     if len(rules) < 2:
         return []
 

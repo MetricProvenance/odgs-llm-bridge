@@ -183,7 +183,7 @@ bridge = OdgsLlmBridge(provider=MyProvider())
 
 ---
 
-> **Require architectural clearance or SLA support?** [Consult the Metric Provenance Enterprise Portal](https://platform.metricprovenance.com)
+> **For architectural clearance and certified regulatory packs:** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief)
 
 ---
 
