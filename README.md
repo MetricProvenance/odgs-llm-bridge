@@ -1,82 +1,92 @@
-# ODGS LLM Bridge
+# Open Data Governance Standard (ODGS) — LLM Bridge
 
-> AI-powered governance capabilities for the Open Data Governance Standard (v6.0 Sovereign Validation Engine)
+> **AI-generated governance artefacts, deterministically enforced.**
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![ODGS](https://img.shields.io/badge/ODGS-v6.0.0-green.svg)](https://github.com/MetricProvenance/odgs-protocol)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://python.org)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.3_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/brief)
+[![LLM Bridge](https://img.shields.io/badge/LLM_Bridge-v0.2.0-blueviolet)](https://pypi.org/project/odgs-llm-bridge/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-llm-bridge?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs-llm-bridge)
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
 
 ---
 
-## What Is This?
+> **For engineers:** See [Quick Start](#quick-start) below.  
+> **For compliance and risk officers:** The bridge produces governance artefacts — compiled rules, drift reports, S-Cert narratives — that enter the Sovereign Validation Engine as structured, schema-validated JSON.  
+> **For architectural assessment and certified packs:** [metricprovenance.com/brief](https://metricprovenance.com/brief)
 
-The **ODGS LLM Bridge** is a **headless, standalone package** that augments the deterministic ODGS core engine with five AI-powered capabilities. It bridges the gap between probabilistic LLM output and the zero-tolerance deterministic ODGS validation engine.
+---
+
+> [!IMPORTANT]
+> **ODGS LLM Bridge v0.2.0 — Offline Licence Verification + Enterprise Tier Gate**
+> Licence JWTs are now verified **cryptographically** (Ed25519, offline — no network call).
+> Regulatory compilation, drift detection, and catalog synchronisation require a certified pack licence.
+> The community tier — schema validation, conformance checking — remains open with no registration.
+
+---
+
+### What's New in v0.2.0
+
+| Change | Detail |
+|---|---|
+| **Ed25519 offline verification** | Licence JWTs signed by Metric Provenance; verified against embedded public key. Forged tokens are cryptographically rejected. |
+| **Tier gate** | Community / Professional / Enterprise access from `odgs-workspace.yaml`. Air-gapped environments fully supported. |
+| **`odgs-maturity` integration** | Governance maturity scoring delegates to the 8-pillar DAMA DMBOK engine when installed. |
+
+> The European Data Governance Maturity Benchmark 2026 recorded an average maturity of **37.6%** across 99 enterprises — a **62.4% gap** against current regulatory expectation. The ODGS engine applies the same assessment methodology at the pipeline level.
+
+---
+
+## What This Is
+
+The **ODGS LLM Bridge** is a headless Python package that converts probabilistic LLM output into deterministic governance artefacts. Every LLM-generated artifact passes a JSON Schema Validation Gate before it enters the ODGS Sovereign Validation Engine — the engine never sees malformed data.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    ODGS LLM Bridge                          │
-│                                                             │
-│  Regulation Text ──→ [Regulatory Compiler] ──→ ODGS Rules  │
-│  Definition Files ──→ [Drift Watchdog]     ──→ Warnings    │
-│  Rule Sets       ──→ [Conflict Detector]   ──→ Conflicts   │
-│  S-Cert JSON     ──→ [Audit Narrator]      ──→ Narrative   │
-│  Catalog Meta    ──→ [Binding Discoverer]   ──→ Data Map    │
-│                                                             │
-│              ↓ All outputs validated ↓                      │
-│         [JSON Schema Validation Gate]                       │
-│              ↓ Before entering ↓                            │
-│     [ODGS Sovereign Validation Engine v6.0]                 │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                      ODGS LLM Bridge                         │
+│                                                              │
+│  Regulation Text ──→ [Regulatory Compiler] ──→ ODGS Rules   │
+│  Definition Files ──→ [Drift Watchdog]     ──→ Alerts       │
+│  Rule Sets        ──→ [Conflict Detector]  ──→ Conflicts     │
+│  S-Cert JSON      ──→ [Audit Narrator]     ──→ Narrative     │
+│  Catalog Metadata ──→ [Binding Discoverer] ──→ Data Map      │
+│                                                              │
+│              ↓  All outputs pass through  ↓                  │
+│           [JSON Schema Validation Gate]                      │
+│              ↓  before entering          ↓                   │
+│       [ODGS Sovereign Validation Engine v6.0]                │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-**Key principle:** LLMs are probabilistic. ODGS is deterministic. The bridge ensures every LLM-generated artifact passes JSON schema validation before entering the engine.
+### EU AI Act & High-Risk AI Systems
+
+Organisations operating High-Risk AI Systems under **EU AI Act Articles 10 and 12** require demonstrable, auditable data governance at the pipeline level. The bridge compiles regulatory text into machine-verifiable ODGS rules; each evaluation produces an S-Cert suitable for regulatory submission.
+
+Certified Sovereign Packs and the S-Cert Registry are available through Metric Provenance certified implementation partners. For architectural assessment: [metricprovenance.com/brief](https://metricprovenance.com/brief).
 
 ---
 
-## Architecture: Model-Agnostic Providers
-
-The bridge supports **any LLM** through a pluggable provider abstraction:
-
-| Provider | Package Extra | Use Case |
-|---|---|---|
-| **Ollama** (local) | `pip install odgs-llm-bridge[ollama]` | Full sovereignty — zero egress |
-| **Google GenAI** | `pip install odgs-llm-bridge[google]` | Gemini cloud API |
-| **OpenAI-compatible** | `pip install odgs-llm-bridge[openai]` | GPT-NL, Mistral, GPT-4o, etc. |
-| **LiteLLM** | `pip install odgs-llm-bridge[litellm]` | Universal router (100+ providers) |
-
-**Auto-detection priority:** Ollama (local) → Google GenAI → OpenAI → Error
-
----
-
-## Installation
+## Quick Start
 
 ```bash
-# Core bridge (no LLM provider — bring your own)
+# Core bridge — no LLM provider bundled (bring your own)
 pip install odgs-llm-bridge
 
-# With Ollama (recommended for sovereignty)
+# With Ollama (recommended for air-gapped / sovereign deployments)
 pip install odgs-llm-bridge[ollama]
 
 # With all providers
 pip install odgs-llm-bridge[all]
 ```
 
----
-
-## Quick Start
-
 ### Python API
 
 ```python
 from odgs_llm import OdgsLlmBridge
 
-# Auto-detects best available provider
+# Auto-detects best available provider (Ollama → Google GenAI → OpenAI)
 bridge = OdgsLlmBridge()
 
-# Or specify explicitly
-bridge = OdgsLlmBridge(provider="ollama", model="gemma4:26b")
-
-# 1. Compile regulation text → ODGS rules
+# 1. Compile regulation text → validated ODGS rules
 rules = bridge.compile_regulation("""
     Article 10(3): The provider shall ensure that training,
     validation and testing data sets are relevant, sufficiently
@@ -84,80 +94,89 @@ rules = bridge.compile_regulation("""
     and complete in view of the intended purpose.
 """)
 
-# 2. Narrate an S-Cert for executives
+# 2. Narrate an S-Cert for non-technical stakeholders
 narrative = bridge.narrate_audit(scert_json, audience="executive")
 
-# 3. Detect rule conflicts
+# 3. Detect contradictions between regulatory rule sets
 conflicts = bridge.detect_conflicts(all_rules)
 
-# 4. Check for semantic drift
+# 4. Identify definitional drift across governance artefact versions
 warnings = bridge.check_drift("./definitions/", threshold_days=90)
 
-# 5. Discover bindings from catalog
+# 5. Auto-generate physical data map from catalog metadata
 bindings = bridge.discover_bindings(snowflake_catalog)
 ```
 
 ### CLI
 
 ```bash
-# Compile a regulation file
 odgs-llm compile regulation.txt -o rules.json
-
-# Check definitions for drift
 odgs-llm drift ./definitions/ --threshold 90
-
-# Detect conflicts
 odgs-llm conflicts rules.json
-
-# Narrate an S-Cert
 odgs-llm narrate scert.json --audience legal -o report.md
-
-# Discover bindings
 odgs-llm discover catalog.json --metrics metrics.json -o bindings.json
-
-# Health check
 odgs-llm health --provider ollama
 ```
 
 ---
 
-## The Five Capabilities
+## Capabilities
 
-### B.1: Regulatory Compiler
-Converts raw regulation text (statutes, SLA clauses, policy documents) into ODGS-compliant rule JSON objects ready for the Sovereign Validation Engine.
+### Community (Free — no account required)
 
-### B.2: Drift Watchdog
-Scans legislative definition files for semantic staleness — detects rules whose source regulations may have been updated, hashes that haven't been refreshed, or effective dates that have expired.
+| Capability | Description |
+|:---|:---|
+| Schema validation | Validate LLM-generated artefacts against ODGS JSON schemas |
+| Governance scoring | 8-pillar DAMA DMBOK maturity score (0–100) with gap analysis |
+| Conformance check | Run ODGS conformance self-check against workspace definitions |
 
-### B.3: Conflict Detector
-Analyzes rule sets for semantic conflicts (contradictions, overlaps, shadows, deadlocks) across different regulatory sources or jurisdictions.
+### Professional (Certified Pack Licence)
 
-### B.4: Audit Narrator
-Converts S-Cert (Semantic Certificate) JSON into human-readable narratives for three audiences: executive, legal, and technical.
+| Capability | Description |
+|:---|:---|
+| `compile_regulation` | Convert legislative text (EU AI Act, DORA, GDPR) → ODGS rule JSON |
+| `check_drift` | Detect semantic drift in governance definitions across versions |
+| `detect_conflicts` | Identify contradictions and shadows between regulatory rule sets |
+| `narrate_audit` | Convert S-Cert JSON → narrative for executive, legal, or technical audiences |
+| `discover_bindings` | Auto-generate `physical_data_map.json` from Snowflake, Databricks, dbt catalogs |
 
-### B.5: Binding Discoverer
-Given data catalog metadata (Snowflake, Databricks, dbt, BigQuery), auto-generates `physical_data_map.json` binding physical columns to ODGS metrics.
+### Enterprise (Certified Pack Licence + Partner Agreement)
+
+| Capability | Description |
+|:---|:---|
+| `sync_catalog` | Pull and ingest metadata from Databricks / Snowflake / Collibra |
+| `harvest_sovereign_rules` | Extract and mint sovereign rules directly from data stores (Flint Bridge) |
+
+*Certified Pack licensing is handled through Metric Provenance partners: [metricprovenance.com/brief](https://metricprovenance.com/brief).*
 
 ---
 
-## Output Validation
+## Workspace Licence Configuration
 
-Every LLM-generated artifact passes through a **JSON Schema Validation Gate** before it can enter the ODGS engine:
+For air-gapped and offline deployments, licences are issued as Ed25519-signed JWTs and placed in `odgs-workspace.yaml`:
 
-```python
-# This happens automatically inside the bridge
-from odgs_llm.schemas.output_validators import validate_rules
-
-validated = validate_rules(llm_output)  # invalid rules silently dropped
+```yaml
+license:
+  key: "eyJ..."   # Ed25519-signed JWT issued by Metric Provenance
+  tier: enterprise
 ```
 
-Invalid outputs are logged and filtered — the deterministic engine never sees malformed data.
+The bridge verifies the JWT signature offline against the embedded public key — no network call required. Licence issuance is handled through [metricprovenance.com/brief](https://metricprovenance.com/brief).
 
 ---
 
-## Custom Providers
+## Model Providers
 
-Implement the `ModelProvider` interface to bring any LLM:
+| Provider | Extra | Recommended for |
+|:---|:---|:---|
+| **Ollama** (local) | `pip install odgs-llm-bridge[ollama]` | Full sovereignty — zero egress, air-gapped environments |
+| **Google GenAI** | `pip install odgs-llm-bridge[google]` | Gemini cloud API |
+| **OpenAI-compatible** | `pip install odgs-llm-bridge[openai]` | GPT-NL (TNO), Mistral, GPT-4o |
+| **LiteLLM** | `pip install odgs-llm-bridge[litellm]` | Universal router (100+ providers) |
+
+Auto-detection priority: Ollama → Google GenAI → OpenAI → error.
+
+### Custom Provider
 
 ```python
 from odgs_llm.providers import ModelProvider, ModelResponse
@@ -166,7 +185,6 @@ class MyProvider(ModelProvider):
     name = "my-provider"
 
     def generate(self, system_prompt, user_message, **kwargs) -> ModelResponse:
-        # Your LLM call here
         return ModelResponse(text="...", model="my-model", provider=self.name)
 
 bridge = OdgsLlmBridge(provider=MyProvider())
@@ -176,15 +194,26 @@ bridge = OdgsLlmBridge(provider=MyProvider())
 
 ## Normative References
 
-- **ODGS v6.0.0** — Sovereign Validation Engine
-- **EU AI Act (2024/1689)** — Articles 10, 12
+- **ODGS v6.0.3** — Sovereign Validation Engine specification
+- **EU AI Act (2024/1689)** — Articles 10, 12 (data governance obligations for high-risk AI)
 - **ISO/IEC 42001:2023** — AI Management System
+- **DAMA DMBOK v2** — 8-pillar data management maturity framework
 - **GPT4NL (TNO)** — Dutch sovereign LLM initiative
 
 ---
 
-> **For architectural clearance and certified regulatory packs:** [Consult the Sovereign S-Cert Registry](https://metricprovenance.com/brief)
+## About ODGS
 
----
+The Open Data Governance Standard (ODGS) is an open protocol for deterministic data governance enforcement. It is a candidate standard under CEN/CENELEC JTC 25 and has been submitted to NEN ballot N42 (closes May 2026).
 
-*Apache 2.0 Licensed — Part of the ODGS Ecosystem*
+- [Protocol specification](https://github.com/MetricProvenance/odgs) — `pip install odgs`
+- [MCP Server](https://pypi.org/project/odgs-mcp-server/) — `pip install odgs-mcp-server`
+- [Maturity engine](https://pypi.org/project/odgs-maturity/) — `pip install odgs-maturity`
+- [Research paper (SSRN 6205478)](https://papers.ssrn.com/abstract=6205478)
+- [Metric Provenance](https://metricprovenance.com/brief)
+
+## Licence
+
+Apache 2.0 — see [LICENSE](LICENSE).
+
+The protocol engine and LLM bridge are open source. Certified Regulation Packs are issued under a commercial licence through Metric Provenance certified partners.
