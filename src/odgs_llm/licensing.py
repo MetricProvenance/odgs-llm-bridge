@@ -39,9 +39,13 @@ _LICENCE_PUBLIC_KEY_TEST = """-----BEGIN PUBLIC KEY-----
 MCowBQYDK2VwAyEAmVcxflkCJree6sw+/duSP2YO2XGhCv6rSA86/1XUr3Y=
 -----END PUBLIC KEY-----"""
 
-# PRODUCTION public key — placeholder until production keypair is generated.
-# Replace this before issuing the first real customer licence.
-_LICENCE_PUBLIC_KEY_PRODUCTION = _LICENCE_PUBLIC_KEY_TEST  # TODO: replace with production key
+# PRODUCTION public key — Ed25519 public key for verifying customer licence JWTs.
+# Corresponding private key stored in GCP Secret Manager:
+#   projects/metric-provenance-prod/secrets/odgs-licence-signing-key/versions/1
+# Generated 2026-05-11 via: openssl genpkey -algorithm ed25519
+_LICENCE_PUBLIC_KEY_PRODUCTION = """-----BEGIN PUBLIC KEY-----
+MCowBQYDK2VwAyEAmkNRKcgAj2v2OD7RksOF+Fiuh09pKes971Zo9ODwg18=
+-----END PUBLIC KEY-----"""
 
 import os
 _ENV = os.environ.get("ODGS_LICENCE_ENV", "production")
