@@ -169,6 +169,6 @@ def upgrade_prompt(skill_name: str, required_tier: Tier, maturity_impact: str) -
             f"The '{skill_name}' capability requires a {required_tier.value} licence. "
             f"This would address: {maturity_impact}"
         ),
-        "upgrade_url": "https://metricprovenance.com/brief",
+        "upgrade_url": "https://metricprovenance.com/pricing",
         "current_gaps": maturity_impact,
     }
