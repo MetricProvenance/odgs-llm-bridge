@@ -10,7 +10,7 @@
 
 ---
 
-> **For engineers:** See [Quick Start](#quick-start) below.  
+> **For engineers:** See [Quick Start](#quick-start) below, or the guided walkthrough at [metricprovenance.com/start](https://www.metricprovenance.com/start).  
 > **For compliance and risk officers:** The bridge produces governance artefacts — compiled rules, drift reports, S-Cert narratives — that enter the Sovereign Validation Engine as structured, schema-validated JSON.  
 > **For architectural assessment and certified packs:** [metricprovenance.com/pricing](https://metricprovenance.com/pricing)
 
