@@ -2,8 +2,8 @@
 
 > **AI-generated governance artefacts, deterministically enforced.**
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.3_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
-[![LLM Bridge](https://img.shields.io/badge/LLM_Bridge-v0.2.2-blueviolet)](https://pypi.org/project/odgs-llm-bridge/)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.0.5_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
+[![LLM Bridge](https://img.shields.io/badge/LLM_Bridge-v0.2.3-blueviolet)](https://pypi.org/project/odgs-llm-bridge/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-llm-bridge?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs-llm-bridge)
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-lightgrey)](LICENSE)
@@ -17,7 +17,7 @@
 ---
 
 > [!IMPORTANT]
-> **ODGS LLM Bridge v0.2.2 — Offline Licence Verification + Enterprise Tier Gate**
+> **ODGS LLM Bridge v0.2.3 — Offline Licence Verification + Enterprise Tier Gate**
 > Licence JWTs are now verified **cryptographically** (Ed25519, offline — no network call).
 > Regulatory compilation, drift detection, and catalog synchronisation require a certified pack licence.
 > The community tier — schema validation, conformance checking — remains open with no registration.
@@ -204,7 +204,7 @@ bridge = OdgsLlmBridge(provider=MyProvider())
 
 ## About ODGS
 
-The Open Data Governance Standard (ODGS) is an open protocol for deterministic data governance enforcement. It cleared the NEN N42 ballot (May 2026) and is approved as a Working Draft; NEN is formally submitting the New Work Item Proposal to CEN/CENELEC JTC 25.
+The Open Data Governance Standard (ODGS) is an open protocol for deterministic data governance enforcement. ODGS is on a path toward formal standardization.
 
 - [Protocol specification](https://github.com/MetricProvenance/odgs) — `pip install odgs`
 - [MCP Server](https://pypi.org/project/odgs-mcp-server/) — `pip install odgs-mcp-server`

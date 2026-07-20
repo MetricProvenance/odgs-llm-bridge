@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.2.3 — 2026-07-20
+
+### Fixed
+
+- Added the missing `LICENSE` file — the README has always stated Apache 2.0 but the file itself wasn't in the repo.
+
+### Docs
+
+- Removed forward-looking standardization-progress commentary; the standard and the software are two different things and this repo's docs should describe the latter.
+- Protocol badge brought current to the `odgs` 6.0.5 release.
+
+No functional changes to the bridge, providers, or capabilities.
+
 ## v0.2.2 — 2026-07-18
 
 ### Fixed

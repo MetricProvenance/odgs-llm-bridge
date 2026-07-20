@@ -12,7 +12,7 @@ to augment the deterministic ODGS core with five AI capabilities:
 5. Binding Discoverer    — catalog metadata → physical_data_map.json
 """
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 
 from odgs_llm.bridge import OdgsLlmBridge
 
