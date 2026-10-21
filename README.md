@@ -2,7 +2,7 @@
 
 > **AI-generated governance artefacts, deterministically enforced.**
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.1.0-0055AA)](https://metricprovenance.com/pricing)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.1.0-0055AA)](https://metricprovenance.com/#suite)
 [![LLM Bridge](https://img.shields.io/badge/LLM_Bridge-v0.2.3-blueviolet)](https://pypi.org/project/odgs-llm-bridge/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-llm-bridge?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs-llm-bridge)
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
@@ -12,7 +12,7 @@
 
 > **For engineers:** See [Quick Start](#quick-start) below, or the guided walkthrough at [metricprovenance.com/start](https://www.metricprovenance.com/start).  
 > **For compliance and risk officers:** The bridge produces governance artefacts — compiled rules, drift reports, S-Cert narratives — that enter the Sovereign Validation Engine as structured, schema-validated JSON.  
-> **For architectural assessment and certified packs:** [metricprovenance.com/pricing](https://metricprovenance.com/pricing)
+> **For architectural assessment and certified packs:** [metricprovenance.com/#suite](https://metricprovenance.com/#suite)
 
 ---
 
@@ -61,7 +61,7 @@ The **ODGS LLM Bridge** is a headless Python package that converts probabilistic
 
 Organisations operating High-Risk AI Systems under **EU AI Act Articles 10 and 12** require demonstrable, auditable data governance at the pipeline level. The bridge compiles regulatory text into machine-verifiable ODGS rules; each evaluation produces an S-Cert suitable for regulatory submission.
 
-Certified Sovereign Packs and the S-Cert Registry are available through Metric Provenance certified implementation partners. For architectural assessment: [metricprovenance.com/pricing](https://metricprovenance.com/pricing).
+Certified Sovereign Packs and the S-Cert Registry are available through Metric Provenance certified implementation partners. For architectural assessment: [metricprovenance.com/#suite](https://metricprovenance.com/#suite).
 
 ---
 
@@ -147,7 +147,7 @@ odgs-llm health --provider ollama
 | `sync_catalog` | Pull and ingest metadata from Databricks / Snowflake / Collibra |
 | `harvest_sovereign_rules` | Extract and mint sovereign rules directly from data stores (Flint Bridge) |
 
-**Enterprise Rollout & Certified Packs** — see [metricprovenance.com/pricing](https://metricprovenance.com/pricing) or read the [Executive Brief](https://metricprovenance.com/executive-brief).
+**Enterprise Rollout & Certified Packs** — see [metricprovenance.com/#suite](https://metricprovenance.com/#suite) or read the [Executive Brief](https://metricprovenance.com/executive-brief).
 
 ---
 
@@ -161,7 +161,7 @@ license:
   tier: enterprise
 ```
 
-The bridge verifies the JWT signature offline against the embedded public key — no network call required. Licence issuance is handled through [metricprovenance.com/pricing](https://metricprovenance.com/pricing).
+The bridge verifies the JWT signature offline against the embedded public key — no network call required. Licence issuance is handled through [metricprovenance.com/#suite](https://metricprovenance.com/#suite).
 
 ---
 
@@ -210,7 +210,7 @@ The Open Data Governance Standard (ODGS) is an open protocol for deterministic d
 - [MCP Server](https://pypi.org/project/odgs-mcp-server/) — `pip install odgs-mcp-server`
 - [Maturity engine](https://pypi.org/project/odgs-maturity/) — `pip install odgs-maturity`
 - [Research paper (SSRN 6205478)](https://papers.ssrn.com/abstract=6205478)
-- [Metric Provenance](https://metricprovenance.com/pricing)
+- [Metric Provenance](https://metricprovenance.com/#suite)
 
 ## Licence
 

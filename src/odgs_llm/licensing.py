@@ -18,31 +18,12 @@ logger = logging.getLogger(__name__)
 # Embedded public keys
 # ---------------------------------------------------------------------------
 
-# Production public key — replace with production key before first real
-# customer licence is issued. Generate via:
-#   python3 -c "
-#   from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-#   from cryptography.hazmat.primitives import serialization
-#   k = Ed25519PrivateKey.generate()
-#   print(k.public_key().public_bytes(serialization.Encoding.PEM,
-#         serialization.PublicFormat.SubjectPublicKeyInfo).decode())"
-#
-# Store the private key in GCP Secret Manager as:
-#   projects/metricprovenance/secrets/odgs-licence-signing-key/versions/latest
-#
-# Then update LICENCE_PUBLIC_KEY_PEM below and rebuild / republish the package.
-
-# TEST public key — used in CI, E2E tests, and local development.
-# The corresponding private key is at /tmp/odgs_licence_test_private.pem
-# (generated during development setup, never committed).
+# TEST public key — used in CI and unit tests (`ODGS_LICENCE_ENV=test`).
 _LICENCE_PUBLIC_KEY_TEST = """-----BEGIN PUBLIC KEY-----
 MCowBQYDK2VwAyEAmVcxflkCJree6sw+/duSP2YO2XGhCv6rSA86/1XUr3Y=
 -----END PUBLIC KEY-----"""
 
-# PRODUCTION public key — Ed25519 public key for verifying customer licence JWTs.
-# Corresponding private key stored in GCP Secret Manager:
-#   projects/metric-provenance-prod/secrets/odgs-licence-signing-key/versions/1
-# Generated 2026-05-11 via: openssl genpkey -algorithm ed25519
+# PRODUCTION public key — Ed25519 public key for offline verification of workspace licence JWTs.
 _LICENCE_PUBLIC_KEY_PRODUCTION = """-----BEGIN PUBLIC KEY-----
 MCowBQYDK2VwAyEAmkNRKcgAj2v2OD7RksOF+Fiuh09pKes971Zo9ODwg18=
 -----END PUBLIC KEY-----"""
@@ -169,6 +150,6 @@ def upgrade_prompt(skill_name: str, required_tier: Tier, maturity_impact: str) -
             f"The '{skill_name}' capability requires a {required_tier.value} licence. "
             f"This would address: {maturity_impact}"
         ),
-        "upgrade_url": "https://metricprovenance.com/pricing",
+        "upgrade_url": "https://metricprovenance.com/#suite",
         "current_gaps": maturity_impact,
     }
