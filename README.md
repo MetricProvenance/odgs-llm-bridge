@@ -2,7 +2,7 @@
 
 > **AI-generated governance artefacts, deterministically enforced.**
 
-[![Protocol](https://img.shields.io/badge/Protocol-v6.0.5_(Sovereign_Engine)-0055AA)](https://metricprovenance.com/pricing)
+[![Protocol](https://img.shields.io/badge/Protocol-v6.1.0-0055AA)](https://metricprovenance.com/pricing)
 [![LLM Bridge](https://img.shields.io/badge/LLM_Bridge-v0.2.3-blueviolet)](https://pypi.org/project/odgs-llm-bridge/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/odgs-llm-bridge?label=PyPI%20Downloads&color=blue)](https://pypistats.org/packages/odgs-llm-bridge)
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
@@ -30,7 +30,7 @@
 |---|---|
 | **Ed25519 offline verification** | Licence JWTs signed by Metric Provenance; verified against embedded public key. Forged tokens are cryptographically rejected. |
 | **Tier gate** | Community / Professional / Enterprise access from `odgs-workspace.yaml`. Air-gapped environments fully supported. |
-| **`odgs-maturity` integration** | Governance maturity scoring delegates to the 8-pillar DAMA DMBOK engine when installed. |
+| **`odgs-maturity` integration** | Governance maturity scoring delegates to the 8-pillar ISO/IEC 38505-1 & ISO/IEC 25012 engine when installed. |
 
 > The European Data Governance Maturity Benchmark 2026 recorded an average maturity of **37.6%** across 99 enterprises — a **62.4% gap** against current regulatory expectation. The ODGS engine applies the same assessment methodology at the pipeline level.
 
@@ -53,7 +53,7 @@ The **ODGS LLM Bridge** is a headless Python package that converts probabilistic
 │              ↓  All outputs pass through  ↓                  │
 │           [JSON Schema Validation Gate]                      │
 │              ↓  before entering          ↓                   │
-│       [ODGS Sovereign Validation Engine v6.0]                │
+│       [ODGS Runtime Enforcement Engine v6.1.0]                │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -127,7 +127,7 @@ odgs-llm health --provider ollama
 | Capability | Description |
 |:---|:---|
 | Schema validation | Validate LLM-generated artefacts against ODGS JSON schemas |
-| Governance scoring | 8-pillar DAMA DMBOK maturity score (0–100) with gap analysis |
+| Governance scoring | 8-pillar ISO/IEC 38505-1 & ISO/IEC 25012 maturity score (0–100) with gap analysis |
 | Conformance check | Run ODGS conformance self-check against workspace definitions |
 
 ### Professional (Certified Pack Licence)
@@ -147,7 +147,7 @@ odgs-llm health --provider ollama
 | `sync_catalog` | Pull and ingest metadata from Databricks / Snowflake / Collibra |
 | `harvest_sovereign_rules` | Extract and mint sovereign rules directly from data stores (Flint Bridge) |
 
-**Licences are self-serve** — buy at [metricprovenance.com/pricing](https://metricprovenance.com/pricing) (Team €990/yr single pack · Professional €2,490/yr all packs · Consultant €4,990/yr white-label); your key is emailed on purchase. Enterprise deployments via certified partners.
+**Enterprise Rollout & Certified Packs** — see [metricprovenance.com/pricing](https://metricprovenance.com/pricing) or read the [Executive Brief](https://metricprovenance.com/executive-brief).
 
 ---
 
@@ -194,10 +194,10 @@ bridge = OdgsLlmBridge(provider=MyProvider())
 
 ## Normative References
 
-- **ODGS v6.0.3** — Sovereign Validation Engine specification
+- **ODGS v6.1.0** — Sovereign Validation Engine specification
 - **EU AI Act (2024/1689)** — Articles 10, 12 (data governance obligations for high-risk AI)
 - **ISO/IEC 42001:2023** — AI Management System
-- **DAMA DMBOK v2** — 8-pillar data management maturity framework
+- **ISO/IEC 38505-1:2026 & ISO/IEC 25012:2008** — 8-pillar data governance & quality maturity framework
 - **GPT4NL (TNO)** — Dutch sovereign LLM initiative
 
 ---
@@ -206,7 +206,7 @@ bridge = OdgsLlmBridge(provider=MyProvider())
 
 The Open Data Governance Standard (ODGS) is an open protocol for deterministic data governance enforcement. ODGS is on a path toward formal standardization.
 
-- [Protocol specification](https://github.com/MetricProvenance/odgs) — `pip install odgs`
+- [Protocol specification](https://github.com/MetricProvenance/odgs-protocol) — `pip install odgs`
 - [MCP Server](https://pypi.org/project/odgs-mcp-server/) — `pip install odgs-mcp-server`
 - [Maturity engine](https://pypi.org/project/odgs-maturity/) — `pip install odgs-maturity`
 - [Research paper (SSRN 6205478)](https://papers.ssrn.com/abstract=6205478)

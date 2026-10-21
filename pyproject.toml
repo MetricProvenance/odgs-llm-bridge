@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odgs-llm-bridge"
-version = "0.2.3"
+version = "0.2.4"
 description = "LLM Bridge for the Open Data Governance Standard — AI-powered regulatory compilation, drift detection, conflict analysis, audit narration, and binding discovery."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -28,7 +28,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "odgs>=6.0.0",
+    "odgs>=6.1.0",
     "typer>=0.9.0",
     "rich>=13.0.0",
     "pydantic>=2.0.0",
